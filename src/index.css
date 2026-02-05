@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap');
+/* Secondary modern font */
+
+:root {
+  --bg-dark: #0f0518;
+  --neon-pink: #ff00ff;
+  --neon-cyan: #00ffff;
+  --neon-yellow: #f0f000;
+  --glass-bg: rgba(20, 20, 30, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --pixel-border: 4px solid #000;
+  --scanline-color: rgba(0, 0, 0, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Press Start 2P', cursive;
+  background-color: var(--bg-dark);
+  color: #fff;
+  overflow-x: hidden;
+  height: 100vh;
+  /* Background will be set via inline style in Layout once image is generated */
+}
+
+/* CRT Scanline & Flicker Effect */
+.crt::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%,
+      rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg,
+      rgba(255, 0, 0, 0.06),
+      rgba(0, 255, 0, 0.02),
+      rgba(0, 0, 255, 0.06));
+  z-index: 999;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+  animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 0.95;
+  }
+
+  50% {
+    opacity: 0.85;
+  }
+
+  100% {
+    opacity: 0.9;
+  }
+}
+
+/* Premium Layout Container */
+.pixel-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+  padding: 20px;
+}
+
+/* Neon Glow Text */
+h1,
+h2,
+h3 {
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow:
+    3px 3px 0px #000,
+    0 0 10px var(--neon-pink),
+    0 0 20px var(--neon-pink);
+  margin-bottom: 2rem;
+  letter-spacing: 2px;
+}
+
+/* Glassmorphism Card Override */
+.premium-card {
+  background: var(--glass-bg);
+  border: 4px solid var(--neon-cyan);
+  box-shadow:
+    0 0 10px var(--neon-cyan),
+    inset 0 0 20px rgba(0, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  padding: 2rem;
+  position: relative;
+  max-width: 600px;
+  width: 100%;
+  border-radius: 4px;
+  /* Slight round for modern feel or keep 0 for pure pixel? Let's keep 0 */
+  margin: 0 auto;
+}
+
+.premium-card::after {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  right: -6px;
+  bottom: -6px;
+  border: 2px solid rgba(0, 255, 255, 0.3);
+  z-index: -1;
+}
+
+/* Animated Button */
+.neon-btn {
+  font-family: 'Press Start 2P', cursive;
+  background: transparent;
+  color: var(--neon-pink);
+  border: 4px solid var(--neon-pink);
+  box-shadow:
+    0 0 5px var(--neon-pink),
+    inset 0 0 5px var(--neon-pink);
+  padding: 1.5rem 2rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  position: relative;
+  transition: all 0.2s ease;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.neon-btn:hover:not(:disabled) {
+  background: var(--neon-pink);
+  color: #fff;
+  box-shadow:
+    0 0 20px var(--neon-pink),
+    inset 0 0 10px var(--neon-pink);
+  transform: scale(1.02);
+}
+
+.neon-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.neon-btn:disabled {
+  border-color: #555;
+  color: #555;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* Input Field */
+.neon-input {
+  width: 100%;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.5);
+  border: 4px solid var(--neon-yellow);
+  color: var(--neon-yellow);
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  outline: none;
+  box-shadow: 0 0 5px var(--neon-yellow);
+  text-align: center;
+}
+
+.neon-input:focus {
+  background: rgba(240, 240, 0, 0.1);
+  box-shadow: 0 0 15px var(--neon-yellow);
+}
+
+/* Utility Animations */
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+
+.shake {
+  animation: shake 0.5s;
+}
